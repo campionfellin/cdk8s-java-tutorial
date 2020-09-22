@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cdk8s-java-tutorial-deployment-pod-94824354
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      cdk8s.deployment: cdk8sjavatutorialdeployment1F6C4BD8
+  template:
+    metadata:
+      labels:
+        cdk8s.deployment: cdk8sjavatutorialdeployment1F6C4BD8
+    spec:
+      containers:
+        - env: []
+          image: helloworld
+          imagePullPolicy: Never
+          name: hello-cdk8s
+          ports:
+            - containerPort: 8080
+          volumeMounts: []
+      volumes: []
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cdk8s-java-tutorial-deployment-service-pod-c838b6f4
+spec:
+  externalIPs: []
+  ports:
+    - port: 8080
+      targetPort: 8080
+  selector:
+    cdk8s.deployment: cdk8sjavatutorialdeployment1F6C4BD8
+  type: LoadBalancer
